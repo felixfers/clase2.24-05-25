@@ -1,0 +1,139 @@
+package rexxar1;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Main extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JButton btnProcesar;
+	private JLabel lblPromedio;
+	private JLabel lblCantidad;
+	private JTextField textCantidad;
+	private JComboBox comboBox;
+	private JTextArea textArea;
+	private JButton btnBorrar;
+	int categoria;
+	double promedio;
+	double actualpen;
+	double descuento;
+	double pension;
+	double nuevapen;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnProcesar = new JButton("procesar");
+		btnProcesar.addActionListener(this);
+		btnProcesar.setBounds(335, 11, 89, 23);
+		contentPane.add(btnProcesar);
+		
+		lblPromedio = new JLabel("promedio");
+		lblPromedio.setBounds(10, 15, 46, 14);
+		contentPane.add(lblPromedio);
+		
+		lblCantidad = new JLabel("cantidad");
+		lblCantidad.setBounds(10, 55, 46, 14);
+		contentPane.add(lblCantidad);
+		
+		textCantidad = new JTextField();
+		textCantidad.setBounds(81, 52, 86, 20);
+		contentPane.add(textCantidad);
+		textCantidad.setColumns(10);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"a1", "a2", "a3"}));
+		comboBox.setBounds(79, 11, 88, 23);
+		contentPane.add(comboBox);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(10, 99, 414, 151);
+		contentPane.add(textArea);
+		
+		btnBorrar = new JButton("borrar");
+		btnBorrar.setBounds(335, 51, 89, 23);
+		contentPane.add(btnBorrar);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		
+		ingresarDatos();
+		calcularPensionActual();
+		calcularDescuento();
+		calcularNuevaPencion();
+		mostrarResultados();
+			}
+	void ingresarDatos() {
+		categoria = comboBox.getSelectedIndex();
+		promedio = textCantidad.parseDouble(textCantidad.getText());  
+	}
+	void calcularPensionActual() {
+		if (categoria == 0)
+			actualpen = 550;
+		else if (categoria == 1)
+			actualpen = 500;
+		else if (categoria ==2)
+			actualpen = 460;
+		else
+			actualpen = 400;
+	}
+	void calcularDescuento() {
+		if(promedio<= 13.99);
+		descuento = 0 ;
+		else if (promedio <= 15.99);
+		descuento = 0.10 * actualpen
+		else if (promedio <=17.99);
+		descuento = 0.12 * actualpen;
+		else descuento = 0.15 *actualpen
+		}
+	void calcularNuevaPencion() {
+		nuevapen = actualpen - descuento;
+			
+	}
+	void mostrarResultados() {
+		textArea.setText("importe" actualpen +"\n");
+		textArea.append("descuento" descuento +"\n");
+		textArea.append("pension" pension +"\n");
+	}
+	
+}

@@ -1,0 +1,6 @@
+#Mon Apr 21 12:40:20 PET 2025
+__DEFAULT__=false
+expression=imprimir
+org.eclipse.help.ui.localSearch.master=true
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.sdk.Google.master=true
